@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default function Ticket({ value, type }) {
   return (
-    <TicketsConteiner>
+    <TicketsConteiner onClick={() => value === 'R$ 250'? console.log('oi'): console.log('tchau')}>
       <TickerBody>
         <TicketContent>
           <h2>{type}</h2>
@@ -40,6 +40,7 @@ const TickerBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color:#FFFFFF;
 `;
 
 const TicketContent = styled.div`
