@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
@@ -10,7 +11,8 @@ export default function Payment() {
       <div>
         {ticketData.map((e, index) => {
           return(
-            <Ticket 
+            <Ticket
+              picked={e.picked} 
               uniqueValue={index}
               value={e.value}
               type={e.type}
