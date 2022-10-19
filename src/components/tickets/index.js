@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function Ticket({ value, type }) {
+export default function Ticket({ value, type, uniqueValue }) {
   return (
-    <TicketsConteiner onClick={() => value === 'R$ 250'? console.log('oi'): console.log('tchau')}>
+    <TicketsConteiner key={uniqueValue}>
       <TickerBody>
         <TicketContent>
           <h2>{type}</h2>

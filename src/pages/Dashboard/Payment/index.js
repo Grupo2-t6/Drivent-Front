@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Ticket from '../../../components/tickets';
-import ticket from '../../../components/tickets/ticketData';
+import ticketData from '../../../components/tickets/ticketData';
 
 export default function Payment() {
   return (
@@ -8,9 +8,10 @@ export default function Payment() {
       <h1>Ingresso e pagamento</h1>
       <h3>Primeiro, escolha sua modalidade de ingresso</h3>
       <div>
-        {ticket.map((e, index) => {
+        {ticketData.map((e, index) => {
           return(
             <Ticket 
+              uniqueValue={index}
               value={e.value}
               type={e.type}
             />
