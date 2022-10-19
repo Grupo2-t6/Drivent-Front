@@ -6,8 +6,9 @@ export default function Ticket({ value, type, uniqueValue, picked }) {
     console.log(uniqueValue);
     //mandar uma requisição lá no db e mudar os dados de picked pra true e criar o db lá
     //dados não vão ser mais via ticketData 
-    //e ai renderizar o background de acordo com o picked ( se true vai ser vermelho se false branco)
-    // depois reduzir a seleção a um , então caso a pessoa clique no presencial , setar o online pra picked: false
+    // fazer uma function que muda o picked pra true e false e depois confirmar no banco ao finalizar a compra do ticket 
+    // a pessoa vai poder escolher entre os tickets sem fazer a requisião no db  e só será possivel a confirmação do ticket no final , quando 
+    //clicar no botão
     //finalizar
   }
   return (
