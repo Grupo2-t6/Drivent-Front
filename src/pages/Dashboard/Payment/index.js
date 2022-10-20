@@ -4,7 +4,7 @@ import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
 import withHotelData from '../../../components/tickets/hotelData';
 import UserContext from '../../../contexts/UserContext';
-
+import useEnrollment from '../../../hooks/api/useEnrollment';
 
 export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
@@ -14,6 +14,9 @@ export default function Payment() {
 
   const { userData } = useContext(UserContext);
   const userOn = userData.id;
+
+  const { enrollment } = useEnrollment();
+  console.log(enrollment)
 
   console.log(userData)
   
@@ -54,7 +57,7 @@ export default function Payment() {
     if (keyIndex === elementIndex + 1) setSelected(newData);
   };
 
-  if(userOn){
+  if(enrollment){
     return(
     <PaymentContainer>
         <>
@@ -161,5 +164,4 @@ const PaymentContainer = styled.div`
 const TicketsContainer = styled.div`
    margin-top: 2%;
    width:  165px;
-   background-color: orange;
 `;  
