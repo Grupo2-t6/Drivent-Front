@@ -6,7 +6,6 @@ import ticketData from '../../../components/tickets/ticketData';
 export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
   const handleSelect = (elementIndex) => {
-    console.log(`You clicked on element with key ${elementIndex}`);
     let newData = [];
     ticketData.map((value, index) => {
       if(index === elementIndex) {
@@ -22,13 +21,7 @@ export default function Payment() {
         newData.push(data);
       }
     });
-    
     setSelected(newData);
-    //mandar uma requisição lá no db e mudar os dados de picked pra true e criar o db lá
-    //dados não vão ser mais via ticketData 
-    //e ai renderizar o background de acordo com o picked ( se true vai ser vermelho se false branco)
-    // depois reduzir a seleção a um , então caso a pessoa clique no presencial , setar o online pra picked: false
-    //finalizar
   };
   return (
     <PaymentConteiner>
