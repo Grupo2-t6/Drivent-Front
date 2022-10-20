@@ -9,6 +9,7 @@ export default function Payment() {
   const [selectedHotel, setSelectedHotel] = useState(withHotelData);
   const [ispicked, setIspicked] = useState(false);
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
+  
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
     let hotelNewData = [];
