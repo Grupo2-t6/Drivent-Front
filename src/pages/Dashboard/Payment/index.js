@@ -12,13 +12,8 @@ export default function Payment() {
   const [ispicked, setIspicked] = useState(false);
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
 
-  const { userData } = useContext(UserContext);
-  const userOn = userData.id;
-
   const { enrollment } = useEnrollment();
   console.log(enrollment)
-
-  console.log(userData)
   
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
@@ -85,14 +80,14 @@ export default function Payment() {
               {selectedHotel.map((e, index) => {
                 let code = e.key;
                 return (
-                  <TicketsConteiner onClick={e => handleSelect(index, withHotelData, code)}>
+                  <TicketsContainer onClick={e => handleSelect(index, withHotelData, code)}>
                     <Ticket
                       picked={e.picked}
                       uniqueValue={index}
                       value={e.value}
                       type={e.type}
                     />
-                  </TicketsConteiner>
+                  </TicketsContainer>
                 );
               })}
             </div>
@@ -103,7 +98,10 @@ export default function Payment() {
             }
           </>
           :
-          <h1>button</h1>
+          <OnlineConfirmation>
+            <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
+            <button>RESERVAR INGRESSO</button>
+          </OnlineConfirmation>
         }
       </>
     </PaymentContainer>
@@ -118,6 +116,33 @@ export default function Payment() {
     )
   }
 }
+
+const OnlineConfirmation = styled.div`
+  margin-top: 2.75rem; 
+  display: flex;
+  flex-direction: column;
+  p{
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    color: #8E8E8E;
+  }
+  button{
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border: none;
+    font-family: 'Roboto';
+    margin-top: 1rem;
+    color: black;
+    width: 10rem;
+    height: 2.4rem;
+    font-size: 14px;
+    transition: .2s ease-in-out;
+  }
+  button:active{
+    transform: scale(0.98);
+  }
+`
 
 const UserNotOn = styled.div`
   width: 100%;
@@ -137,7 +162,6 @@ const UserNotOn = styled.div`
 const PaymentContainer = styled.div`
   width: 100%;
   height: 100%;
-
   h1{
     font-family: 'Roboto';
     font-style: normal;
@@ -164,4 +188,5 @@ const PaymentContainer = styled.div`
 const TicketsContainer = styled.div`
    margin-top: 2%;
    width:  165px;
+
 `;  

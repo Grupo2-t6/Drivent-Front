@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 export default function Ticket({ value, type, uniqueValue, picked }) {
+
   return (
     <TickerBody background={picked ? '#FFEED2' : ' #FFFFFF'}>
       <TicketContent>
@@ -20,12 +22,14 @@ const TickerBody = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${(props) => props.background};
+  cursor: pointer;
 `;
 
 const TicketContent = styled.div`
 display: flex;
 flex-direction: column;
 margin-top: 35%;
+
   h2{
     font-family: 'Roboto';
     font-style: normal;
