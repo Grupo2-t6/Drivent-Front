@@ -5,6 +5,7 @@ import ticketData from '../../../components/tickets/ticketData';
 
 export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
+  const [ispicked, setIspicked] = useState(false);
   const handleSelect = (elementIndex) => {
     let newData = [];
     ticketData.map((value, index) => {
