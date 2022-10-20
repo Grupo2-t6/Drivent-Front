@@ -4,9 +4,26 @@ import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
 
 export default function Payment() {
+  const [selected, setSelected] = useState([]);
   const handleSelect = (elementIndex) => {
     console.log(`You clicked on element with key ${elementIndex}`);
-
+    let newData = [];
+    const elementPicked = ticketData.map((value, index) => {
+      if(index === elementIndex) {
+        const data = {
+          ...value,
+          picked: true
+        };
+        newData.push(data);
+      }else{
+        const data = {
+          ...value
+        };
+        newData.push(data);
+      }
+    });
+    
+    setSelected(newData);
     //mandar uma requisição lá no db e mudar os dados de picked pra true e criar o db lá
     //dados não vão ser mais via ticketData 
     //e ai renderizar o background de acordo com o picked ( se true vai ser vermelho se false branco)
@@ -18,7 +35,7 @@ export default function Payment() {
       <h1>Ingresso e pagamento</h1>
       <h3>Primeiro, escolha sua modalidade de ingresso</h3>
       <div >
-        {ticketData.map((e, index) => {
+        {selected.map((e, index) => {
           return(
             <TicketsConteiner onClick={e => handleSelect(index)}>
               <Ticket
@@ -57,11 +74,12 @@ const PaymentConteiner = styled.div`
   }
   div{
     display: flex;
-    width: 75%;
+    
   }
 `;
 
 const TicketsConteiner = styled.div`
    margin-top: 2%;
-
+   width:  165px;
+   
 `;  

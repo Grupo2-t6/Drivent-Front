@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export default function Ticket({ value, type, uniqueValue, picked }) {
+  console.log(picked);
   return (
     <TickerBody>
       <TicketContent>
