@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
 import withHotelData from '../../../components/tickets/hotelData';
-import UserContext from '../../../contexts/UserContext';
 import useEnrollment from '../../../hooks/api/useEnrollment';
 
 export default function Payment() {
@@ -13,7 +12,6 @@ export default function Payment() {
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
 
   const { enrollment } = useEnrollment();
-  console.log(enrollment)
   
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
