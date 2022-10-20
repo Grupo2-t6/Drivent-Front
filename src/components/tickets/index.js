@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function Ticket({ value, type, uniqueValue, picked }) {
   console.log(picked);
   return (
-    <TickerBody>
+    <TickerBody background={picked ? '#FFEED2' : ' #FFFFFF'}>
       <TicketContent>
         <h2>{type}</h2>
         <h4>{value}</h4>
@@ -20,7 +20,7 @@ const TickerBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color:#FFFFFF;
+  background-color: ${(props) => props.background};
 `;
 
 const TicketContent = styled.div`

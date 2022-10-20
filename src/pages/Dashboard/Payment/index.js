@@ -4,11 +4,11 @@ import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
 
 export default function Payment() {
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState(ticketData);
   const handleSelect = (elementIndex) => {
     console.log(`You clicked on element with key ${elementIndex}`);
     let newData = [];
-    const elementPicked = ticketData.map((value, index) => {
+    ticketData.map((value, index) => {
       if(index === elementIndex) {
         const data = {
           ...value,
