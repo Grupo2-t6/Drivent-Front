@@ -1,4 +1,3 @@
-import { set } from 'date-fns';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Ticket from '../../../components/tickets';
@@ -9,6 +8,7 @@ export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
   const [selectedHotel, setSelectedHotel] = useState(withHotelData);
   const [ispicked, setIspicked] = useState(false);
+  const [hotelIsPicked, setHotelIsPicked] = useState(false);
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
     let hotelNewData = [];
@@ -26,6 +26,7 @@ export default function Payment() {
           ...value,
           picked: true
         };
+        setHotelIsPicked(true);
         hotelNewData.push(data);
       } else if (index !== elementIndex && keyIndex === elementIndex + 1) {
         const data = {
@@ -39,8 +40,8 @@ export default function Payment() {
         hotelNewData.push(data);
       }
     });
-    if(type === 'presencial') setIspicked(true);
-    if(type === 'online') setIspicked(false);
+    if (type === 'presencial') setIspicked(true);
+    if (type === 'online') setIspicked(false);
     if (keyIndex === elementIndex + 3) setSelectedHotel(hotelNewData);
     if (keyIndex === elementIndex + 1) setSelected(newData);
   };
@@ -82,6 +83,11 @@ export default function Payment() {
               );
             })}
           </div>
+          {hotelIsPicked ?
+            <h1>buton</h1>
+            :
+            <></>
+          }
         </>
         :
         <h1>buton</h1>
@@ -106,7 +112,7 @@ const PaymentConteiner = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    margin-top: 37px;
+    margin-top: 20px;
     line-height: 23px;
     color: #8E8E8E;
   }
