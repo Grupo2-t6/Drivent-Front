@@ -1,3 +1,9 @@
+import CreditCard from './creditCard';
+
 export default function Payment() {
-  return 'Pagamento: Em breve!';
+  return(
+    <>
+      <CreditCard/>
+    </>
+  );
 }
