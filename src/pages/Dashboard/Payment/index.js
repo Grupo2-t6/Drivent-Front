@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
 import withHotelData from '../../../components/tickets/hotelData';
+import Informations from '../../../components/ orderSummary ';
 
 export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
@@ -10,6 +11,7 @@ export default function Payment() {
   const [ispicked, setIspicked] = useState(false);
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
   const [sum, setSum] = useState(0);
+  const [finish, setFinish] = useState(false);
 
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
@@ -53,32 +55,18 @@ export default function Payment() {
   };
 
   return (
+
     <PaymentConteiner>
       <h1>Ingresso e pagamento</h1>
-      <h3>Primeiro, escolha sua modalidade de ingresso</h3>
-      <div>
-        {selected.map((e, index) => {
-          let code = e.key;
-          return (
-            <TicketsConteiner onClick={e => handleSelect(index, ticketData, code)}>
-              <Ticket
-                picked={e.picked}
-                uniqueValue={index}
-                value={e.value}
-                type={e.type}
-              />
-            </TicketsConteiner>
-          );
-        })}
-      </div>
-      {ispicked ?
+      
+      {(finish === false) ?
         <>
-          <h3>Ótimo! Agora escolha sua modalidade de hospedagem</h3>
+          <h3>Primeiro, escolha sua modalidade de ingresso</h3>
           <div>
-            {selectedHotel.map((e, index) => {
+            {selected.map((e, index) => {
               let code = e.key;
               return (
-                <TicketsConteiner onClick={e => handleSelect(index, withHotelData, code)}>
+                <TicketsConteiner onClick={e => handleSelect(index, ticketData, code)}>
                   <Ticket
                     picked={e.picked}
                     uniqueValue={index}
@@ -89,23 +77,45 @@ export default function Payment() {
               );
             })}
           </div>
-          {hotelIsPicked ?
-            <ConfirmReservation>
-              <Pedido>
-                <h3>Fechado! O total ficou em </h3>
-                <h2> R$ {sum}.</h2>
-                <h3>Agora é só confirmar:</h3>
-              </Pedido>
-              <Buttom>
-                <h3>Reservar Ingresso</h3>
-              </Buttom>
-            </ConfirmReservation>
+          {ispicked ?
+            <>
+              <h3>Ótimo! Agora escolha sua modalidade de hospedagem</h3>
+              <div>
+                {selectedHotel.map((e, index) => {
+                  let code = e.key;
+                  return (
+                    <TicketsConteiner onClick={e => handleSelect(index, withHotelData, code)}>
+                      <Ticket
+                        picked={e.picked}
+                        uniqueValue={index}
+                        value={e.value}
+                        type={e.type}
+                      />
+                    </TicketsConteiner>
+                  );
+                })}
+              </div>
+              {hotelIsPicked ?
+                <ConfirmReservation>
+                  <Pedido>
+                    <h3>Fechado! O total ficou em </h3>
+                    <h2> R$ {sum}.</h2>
+                    <h3>Agora é só confirmar:</h3>
+                  </Pedido>
+                  <Buttom onClick={() => setFinish(true)}>
+                    <h3>Reservar Ingresso</h3>
+                  </Buttom>
+                </ConfirmReservation>
+                :
+                <></>
+              }
+            </>
             :
-            <></>
+            <h1>buton</h1>
           }
         </>
         :
-        <h1>buton</h1>
+        <Informations type = {ispicked} value = {sum} hotel = {hotelIsPicked}/>
       }
     </PaymentConteiner>
   );
