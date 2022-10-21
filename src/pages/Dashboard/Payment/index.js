@@ -12,7 +12,7 @@ export default function Payment() {
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
 
   const { enrollment } = useEnrollment();
-  
+
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
     let hotelNewData = [];
@@ -50,68 +50,68 @@ export default function Payment() {
     if (keyIndex === elementIndex + 1) setSelected(newData);
   };
 
-  if(enrollment){
-    return(
-    <PaymentContainer>
+  if (enrollment) {
+    return (
+      <PaymentContainer>
         <>
-        <h1>Ingresso e pagamento</h1>
-        <h3>Primeiro, escolha sua modalidade de ingresso</h3>
-        <div>
-          {selected.map((e, index) => {
-            let code = e.key;
-            return (
-              <TicketsContainer onClick={e => handleSelect(index, ticketData, code)}>
-                <Ticket
-                  picked={e.picked}
-                  uniqueValue={index}
-                  value={e.value}
-                  type={e.type}
-                />
-              </TicketsContainer>
-            );
-          })}
-        </div>
-        {ispicked ?
-          <>
-            <h3>Ótimo! Agora escolha sua modalidade de hospedagem</h3>
-            <div>
-              {selectedHotel.map((e, index) => {
-                let code = e.key;
-                return (
-                  <TicketsContainer onClick={e => handleSelect(index, withHotelData, code)}>
-                    <Ticket
-                      picked={e.picked}
-                      uniqueValue={index}
-                      value={e.value}
-                      type={e.type}
-                    />
-                  </TicketsContainer>
-                );
-              })}
-            </div>
-            {hotelIsPicked ?
-              <h1>button</h1>
-              :
-              <></>
-            }
-          </>
-          :
-          <OnlineConfirmation>
-            <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
-            <button>RESERVAR INGRESSO</button>
-          </OnlineConfirmation>
-        }
-      </>
-    </PaymentContainer>
-    )
-  } else{
-    return(
-    <PaymentContainer>
-      <UserNotOn>
-        <p>Você precisa completar sua inscrição antes <br/> de prosseguir pra escolha de ingresso</p>
-      </UserNotOn>
-    </PaymentContainer>
-    )
+          <h1>Ingresso e pagamento</h1>
+          <h3>Primeiro, escolha sua modalidade de ingresso</h3>
+          <div>
+            {selected.map((e, index) => {
+              let code = e.key;
+              return (
+                <TicketsContainer onClick={e => handleSelect(index, ticketData, code)}>
+                  <Ticket
+                    picked={e.picked}
+                    uniqueValue={index}
+                    value={e.value}
+                    type={e.type}
+                  />
+                </TicketsContainer>
+              );
+            })}
+          </div>
+          {ispicked ?
+            <>
+              <h3>Ótimo! Agora escolha sua modalidade de hospedagem</h3>
+              <div>
+                {selectedHotel.map((e, index) => {
+                  let code = e.key;
+                  return (
+                    <TicketsContainer onClick={e => handleSelect(index, withHotelData, code)}>
+                      <Ticket
+                        picked={e.picked}
+                        uniqueValue={index}
+                        value={e.value}
+                        type={e.type}
+                      />
+                    </TicketsContainer>
+                  );
+                })}
+              </div>
+              {hotelIsPicked ?
+                <h1>button</h1>
+                :
+                <></>
+              }
+            </>
+            :
+            <OnlineConfirmation>
+              <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
+              <button>RESERVAR INGRESSO</button>
+            </OnlineConfirmation>
+          }
+        </>
+      </PaymentContainer>
+    );
+  } else {
+    return (
+      <PaymentContainer>
+        <UserNotOn>
+          <p>Você precisa completar sua inscrição antes <br /> de prosseguir pra escolha de ingresso</p>
+        </UserNotOn>
+      </PaymentContainer>
+    );
   }
 }
 
@@ -140,7 +140,7 @@ const OnlineConfirmation = styled.div`
   button:active{
     transform: scale(0.98);
   }
-`
+`;
 
 const UserNotOn = styled.div`
   width: 100%;
@@ -155,7 +155,7 @@ const UserNotOn = styled.div`
     font-size: 1.2rem;
     color: #8E8E8E;
   }
-`
+`;
 
 const PaymentContainer = styled.div`
   width: 100%;
