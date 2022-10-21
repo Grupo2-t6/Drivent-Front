@@ -8,7 +8,7 @@ import useEnrollment from '../../../hooks/api/useEnrollment';
 export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
   const [selectedHotel, setSelectedHotel] = useState(withHotelData);
-  const [ispicked, setIspicked] = useState(false);
+  const [ispicked, setIspicked] = useState(0);
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
 
   const { enrollment } = useEnrollment();
@@ -44,8 +44,8 @@ export default function Payment() {
         hotelNewData.push(data);
       }
     });
-    if (type === 'presencial') setIspicked(true);
-    if (type === 'online') setIspicked(false);
+    if (type === 'presencial') setIspicked(1);
+    if (type === 'online') setIspicked(2);
     if (keyIndex === elementIndex + 3) setSelectedHotel(hotelNewData);
     if (keyIndex === elementIndex + 1) setSelected(newData);
   };
@@ -71,7 +71,7 @@ export default function Payment() {
               );
             })}
           </div>
-          {ispicked ?
+          {ispicked === 1 ?
             <>
               <h3>Ótimo! Agora escolha sua modalidade de hospedagem</h3>
               <div>
@@ -97,8 +97,14 @@ export default function Payment() {
             </>
             :
             <OnlineConfirmation>
-              <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
-              <button>RESERVAR INGRESSO</button>
+              { ispicked === 2 ?
+                <>
+                  <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
+                  <button>RESERVAR INGRESSO</button>
+                </>
+                :
+                <></>
+              }
             </OnlineConfirmation>
           }
         </>
