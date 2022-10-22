@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import Button from '../../../components/Form/Button';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import dayjs from 'dayjs';
+
+import { useNavigate } from 'react-router-dom';
+import { creditCardApi } from '../../../services/creditCardApi';
 
 export default function App() {
   const [number, setNumber] = useState('');
@@ -12,8 +15,10 @@ export default function App() {
   const [cvc, setCvc] = useState('');
   const [focus, setFocus] = useState('');
 
+  const navigate = useNavigate();
+  const value = 50;
+
   const thisMonth = dayjs(new Date()).format('YYYY-MM');
-  console.log(thisMonth);
 
   useEffect(() => {
     ref.current.focus();
@@ -21,8 +26,8 @@ export default function App() {
 
   async function pagar(e) {
     e.preventDefault();
-    const paymentData = { name, number, expiry, cvc };
-    console.log(paymentData);
+    const paymentData = { name, number, expiry, cvc, value };
+    await creditCardApi(paymentData);
   }  
 
   const ref = useRef(null);
@@ -117,11 +122,16 @@ const Container = styled.div`
   
   @media (max-width: 770px){
     flex-direction: column;
+    justify-content: center;
     input{
       width: 80%;
     }
     h4{
       margin-left: 10%;
+    }
+    Button{
+    position: relative;
+    top: 20px; left: 10%;
     }
   }
   `;
@@ -153,9 +163,9 @@ const CvcAndValidate = styled.div`
   }
 
 @media (max-width: 770px){
-    flex-direction: column;
-    input{
-      width: 80%;
-    }
+    /* flex-direction: column; */
+    width: 82%;
+    margin-left: 9%;
+    justify-content: center;
   }
 `;

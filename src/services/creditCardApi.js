@@ -1,7 +1,8 @@
 import api from './api';
 
-export async function creditCard(email, password) {
-  const response = await api.post('/users', { email, password });
+export async function creditCardApi(paymentData) {
+  console.log(paymentData);
+  const response = await api.post('/payment', paymentData);
   return response.data;
 }
 //
