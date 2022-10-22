@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import CreditCardData from './CreditCardData';
+import PaymentConfirm from './paymentConfirm';
 
 export default function CreditCard() {
   return(
