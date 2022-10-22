@@ -6,19 +6,19 @@ export default function Informations(props) {
         <h3>Ingresso escolhido</h3>
         {(props.type === true && props.hotel === true) ?
           <Information>
-            <h3> Presencial + Com hotel</h3>
+            <h3 className='text'> Presencial + Com hotel</h3>
             <h4>R$ {props.value}</h4>
           </Information>
           :
           (props.type === true && props.hotel === false) ?
             <Information>
-              <h3>Presencial + Sem hotel</h3>
+              <h3 className='text'>Presencial + Sem hotel</h3>
               <h4>R$ {props.value} </h4>
             </Information>
 
             :
             <Information>
-              <h3>Online + Sem hotel</h3>
+              <h3 className='text'>Online + Sem hotel</h3>
               <h4>R$ 100 </h4>
             </Information>
         }
@@ -37,6 +37,7 @@ h3{
   font-style: normal; 
   font-weight: 400; 
   font-size: 18px; 
+  
 } 
 `;
 const Information = styled.div` 
@@ -49,13 +50,13 @@ const Information = styled.div`
  flex-direction: column; 
  justify-content: center; 
    
-h3{ 
+.text{ 
   font-family: 'Roboto'; 
   font-style: normal; 
   font-weight: 400; 
   font-size: 16px; 
   text-align: center; 
-  color: #454545; 
+  color: #454545;
 } 
 h4{ 
   font-family: 'Roboto'; 
@@ -63,7 +64,7 @@ h4{
   font-weight: 400; 
   font-size: 18px; 
   text-align: center; 
-  color: #898989; 
+  color: #898989;
   margin-top: 10px; 
 } 
 `;

@@ -19,7 +19,6 @@ export default function Payment() {
     let hotelNewData = [];
     let type = '';
     let hotelType = '';
-    console.log(object);
 
     object.map((value, index) => {
       if (index === elementIndex && keyIndex === elementIndex + 1) {
