@@ -7,7 +7,7 @@ export default UserContext;
 
 export function UserProvider({ children }) {
   const [userData, setUserData] = useLocalStorage('userData', {});
-  
+
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       {children}
