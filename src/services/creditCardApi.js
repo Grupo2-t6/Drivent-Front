@@ -1,7 +1,15 @@
 import api from './api';
 
-export async function creditCard(email, password) {
-  const response = await api.post('/users', { email, password });
-  return response.data;
+export async function creditCardApi(paymentData, token) {
+  try{
+    let isApproved = true;
+    api.post('/payment', paymentData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return isApproved;
+  }catch{
+    return false;
+  }
 }
-//

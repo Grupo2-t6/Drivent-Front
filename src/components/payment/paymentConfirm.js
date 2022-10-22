@@ -3,21 +3,26 @@ import styled from 'styled-components';
 
 export default function PaymentConfirm() {
   return(
-    <Container>
-      <Check>
-        <AiFillCheckCircle/>
-      </Check>
-      <div>
-        <h4>Pagamento confirmado!</h4>
-        <h4>Prossiga para escolha de hospedagem e atividades</h4>
-      </div>
-    </Container>
+    <>
+      <h3>Pagamento</h3>
+      <Container>
+        <Check>
+          <AiFillCheckCircle/>
+        </Check>
+        <Text>
+          <h4>Pagamento confirmado!</h4>
+          <h4>Prossiga para escolha de hospedagem e atividades</h4>
+        </Text>
+      </Container>
+    </>
   );
 }
 
 const Container = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 20px;
+
     h4{
         font-size: 16px;
         font-weight: 700;
@@ -38,4 +43,9 @@ const Check = styled.div`
     height: 40px;
     margin-right: 14px;
     }
+`;
+
+const Text = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
