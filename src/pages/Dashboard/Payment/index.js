@@ -12,12 +12,15 @@ export default function Payment() {
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
   const [sum, setSum] = useState(0);
   const [finish, setFinish] = useState(false);
+  const [withHotel, setWithHotel] = useState(false);
 
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
     let hotelNewData = [];
     let type = '';
-    let valueSum = sum;
+    let hotelType = '';
+    console.log(object);
+
     object.map((value, index) => {
       if (index === elementIndex && keyIndex === elementIndex + 1) {
         type = value.type;
@@ -25,14 +28,13 @@ export default function Payment() {
           ...value,
           picked: true
         };
-        valueSum += value.value;
         newData.push(data);
       } else if (index === elementIndex && keyIndex === elementIndex + 3) {
+        hotelType = value.type;
         const data = {
           ...value,
           picked: true
         };
-        valueSum += value.value;
         setHotelIsPicked(true);
         hotelNewData.push(data);
       } else if (index !== elementIndex && keyIndex === elementIndex + 1) {
@@ -51,14 +53,21 @@ export default function Payment() {
     if (type === 'online') setIspicked(false);
     if (keyIndex === elementIndex + 3) setSelectedHotel(hotelNewData);
     if (keyIndex === elementIndex + 1) setSelected(newData);
-    setSum(valueSum);
+    if (hotelType === 'Com Hotel') {
+      setWithHotel(true);
+      setSum(600);
+    }
+    if (hotelType === 'Sem Hotel') {
+      setWithHotel(false);
+      setSum(250);
+    }
   };
 
   return (
 
     <PaymentConteiner>
       <h1>Ingresso e pagamento</h1>
-      
+
       {(finish === false) ?
         <>
           <h3>Primeiro, escolha sua modalidade de ingresso</h3>
@@ -84,7 +93,7 @@ export default function Payment() {
                 {selectedHotel.map((e, index) => {
                   let code = e.key;
                   return (
-                    <TicketsConteiner onClick={e => handleSelect(index, withHotelData, code)}>
+                    <TicketsConteiner onClick={e => handleSelect(index, withHotelData, code,)}>
                       <Ticket
                         picked={e.picked}
                         uniqueValue={index}
@@ -115,7 +124,7 @@ export default function Payment() {
           }
         </>
         :
-        <Informations type = {ispicked} value = {sum} hotel = {hotelIsPicked}/>
+        <Informations type={ispicked} value={sum} hotel={withHotel} />
       }
     </PaymentConteiner>
   );
