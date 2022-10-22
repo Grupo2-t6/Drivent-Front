@@ -5,7 +5,7 @@ export default function Ticket({ value, type, uniqueValue, picked }) {
     <TickerBody background={picked ? '#FFEED2' : ' #FFFFFF'}>
       <TicketContent>
         <h2>{type}</h2>
-        <h4>{value}</h4>
+        <h4>R${value}</h4>
       </TicketContent>
     </TickerBody>
   );
