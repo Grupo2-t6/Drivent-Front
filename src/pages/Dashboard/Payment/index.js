@@ -4,19 +4,27 @@ import Ticket from '../../../components/tickets';
 import ticketData from '../../../components/tickets/ticketData';
 import withHotelData from '../../../components/tickets/hotelData';
 import useEnrollment from '../../../hooks/api/useEnrollment';
+import Informations from '../../../components/ orderSummary ';
+import CreditCardData from '../../../components/payment/CreditCardData';
+import PaymentConfirm from '../../../components/payment/paymentConfirm';
 
 export default function Payment() {
   const [selected, setSelected] = useState(ticketData);
   const [selectedHotel, setSelectedHotel] = useState(withHotelData);
   const [ispicked, setIspicked] = useState(0);
   const [hotelIsPicked, setHotelIsPicked] = useState(false);
-
   const { enrollment } = useEnrollment();
+  const [sum, setSum] = useState(0);
+  const [finish, setFinish] = useState(false);
+  const [withHotel, setWithHotel] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
 
   const handleSelect = (elementIndex, object, keyIndex) => {
     let newData = [];
     let hotelNewData = [];
     let type = '';
+    let hotelType = '';
+
     object.map((value, index) => {
       if (index === elementIndex && keyIndex === elementIndex + 1) {
         type = value.type;
@@ -26,6 +34,7 @@ export default function Payment() {
         };
         newData.push(data);
       } else if (index === elementIndex && keyIndex === elementIndex + 3) {
+        hotelType = value.type;
         const data = {
           ...value,
           picked: true
@@ -48,13 +57,24 @@ export default function Payment() {
     if (type === 'online') setIspicked(2);
     if (keyIndex === elementIndex + 3) setSelectedHotel(hotelNewData);
     if (keyIndex === elementIndex + 1) setSelected(newData);
+    if (hotelType === 'Com Hotel') {
+      setWithHotel(true);
+      setSum(600);
+    }
+    if (hotelType === 'Sem Hotel') {
+      setWithHotel(false);
+      setSum(250);
+    }
   };
 
-  if (enrollment) {
-    return (
-      <PaymentContainer>
+  if(enrollment){
+  return (
+
+    <PaymentContainer>
+      <h1>Ingresso e pagamento</h1>
+
+      {(finish === false) ?
         <>
-          <h1>Ingresso e pagamento</h1>
           <h3>Primeiro, escolha sua modalidade de ingresso</h3>
           <div>
             {selected.map((e, index) => {
@@ -90,7 +110,16 @@ export default function Payment() {
                 })}
               </div>
               {hotelIsPicked ?
-                <h1>button</h1>
+                <ConfirmReservation>
+                  <Pedido>
+                    <h3>Fechado! O total ficou em </h3>
+                    <h2> R$ {sum}.</h2>
+                    <h3>Agora é só confirmar:</h3>
+                  </Pedido>
+                  <Buttom onClick={() => setFinish(true)}>
+                    <h3>Reservar Ingresso</h3>
+                  </Buttom>
+                </ConfirmReservation>
                 :
                 <></>
               }
@@ -100,7 +129,7 @@ export default function Payment() {
               { ispicked === 2 ?
                 <>
                   <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
-                  <button>RESERVAR INGRESSO</button>
+                  <button onClick={() => setFinish(true)}>RESERVAR INGRESSO</button>
                 </>
                 :
                 <></>
@@ -108,7 +137,17 @@ export default function Payment() {
             </OnlineConfirmation>
           }
         </>
-      </PaymentContainer>
+          :
+        <>
+        <Informations type={ispicked} value={sum} hotel={withHotel} />
+        {isApproved ?
+          <PaymentConfirm/>
+          :
+          <CreditCardData setIsApproved={setIsApproved}/>
+        }
+        </>
+        }
+    </PaymentContainer>
     );
   } else {
     return (
@@ -192,4 +231,56 @@ const PaymentContainer = styled.div`
 const TicketsContainer = styled.div`
    margin-top: 2%;
    width:  165px;
-`;  
+   
+`;
+const ConfirmReservation = styled.div`
+display:flex;
+flex-direction: column; 
+`;
+const Pedido = styled.div` 
+  font-family: 'Roboto'; 
+  font-style: normal; 
+  font-weight: 400; 
+  font-size: 18px; 
+  display: flex; 
+  flex-direction: row; 
+  margin-top: 20px;
+  h3{ 
+  font-family: 'Roboto'; 
+  font-style: normal; 
+  font-size: 20px; 
+  color: #8E8E8E; 
+  margin-left: 5px; 
+  } 
+h2{ 
+  font-family: 'Roboto'; 
+  font-style: normal; 
+  font-weight: 400; 
+  margin-left: 5px; 
+  font-size: 20px; 
+  margin-top: 24px;
+} 
+`;
+const Buttom = styled.div` 
+  width: 162px; 
+  height: 37px; 
+  background: #E0E0E0; 
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25); 
+  border-radius: 4px; 
+  display: flex; 
+  align-items: center; 
+  margin-top: 20px;
+  cursor: pointer;
+
+  h3{ 
+  font-family: 'Roboto'; 
+  font-style: normal; 
+  font-weight: 400; 
+  font-size: 14px; 
+  text-align: center; 
+  color: #000000; 
+  width: 100%;
+  padding-bottom: 10px;
+  } 
+`
+  ;
