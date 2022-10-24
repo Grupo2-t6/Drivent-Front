@@ -31,7 +31,7 @@ export default function CreditCardData({ setIsApproved }) {
     const paymentData = { name, number, expiry, cvc, value };
     const isApproved = await creditCardApi(paymentData, token);
     setIsApproved(isApproved);
-  }  
+  }
 
   const ref = useRef(null);
   return (
@@ -50,6 +50,7 @@ export default function CreditCardData({ setIsApproved }) {
         </CardContainer>
         <form onSubmit={pagar}>
           <input
+            id='card_number'
             type="number" 
             required 
             min="1000000000000000" 
@@ -74,7 +75,7 @@ export default function CreditCardData({ setIsApproved }) {
           />
           <CvcAndValidate>
             <input
-              type="month"
+              type="text"
               min={thisMonth}
               name="expiry"
               placeholder="MM/YY"
@@ -83,15 +84,15 @@ export default function CreditCardData({ setIsApproved }) {
               onFocus={(e) => setFocus(e.target.name)}
             />
             <input
-              type="number"
+              type="text"
               name="cvc"
-              min="100" 
-              max="999" 
-              required 
+              maxLength={3}
+              pattern="\d{3}[^a-z]"
               placeholder="CVC"
               value={cvc}
               onChange={(e) => setCvc(e.target.value)}
               onFocus={(e) => setFocus(e.target.name)}
+              required 
             />
           </CvcAndValidate>
           <Button type="submit">
@@ -116,6 +117,11 @@ const Container = styled.div`
     background-color: #fff;
     border: 1px solid #ced4da;
     border-radius: 8px;
+
+    ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
   }
 
   h4{
@@ -152,7 +158,6 @@ const CardContainer = styled.div`
 const CvcAndValidate = styled.div`
   display: flex;
   input {
-  /* width: 48%; */
   display: block;
   margin: 10px auto;
   padding: 8px 16px;

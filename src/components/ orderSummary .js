@@ -1,21 +1,25 @@
 import styled from 'styled-components';
+
 export default function Informations(props) {
+
+  console.log(props.hotel)
+  console.log(props.type)
+
   return (
     <>
       <OrderSummary>
         <h3>Ingresso escolhido</h3>
-        {(props.type === true && props.hotel === true) ?
+        {(props.type === 1 && props.hotel === true) ?
           <Information>
             <h3 className='text'> Presencial + Com hotel</h3>
             <h4>R$ {props.value}</h4>
           </Information>
           :
-          (props.type === true && props.hotel === false) ?
+          (props.type === 1 && props.hotel === false) ?
             <Information>
               <h3 className='text'>Presencial + Sem hotel</h3>
               <h4>R$ {props.value} </h4>
             </Information>
-
             :
             <Information>
               <h3 className='text'>Online + Sem hotel</h3>

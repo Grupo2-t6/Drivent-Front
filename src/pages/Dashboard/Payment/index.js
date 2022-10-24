@@ -116,9 +116,7 @@ export default function Payment() {
                     <h2> R$ {sum}.</h2>
                     <h3>Agora é só confirmar:</h3>
                   </Pedido>
-                  <Buttom onClick={() => setFinish(true)}>
-                    <h3>Reservar Ingresso</h3>
-                  </Buttom>
+                  <button onClick={() => setFinish(true)}>RESERVAR INGRESSO</button>
                 </ConfirmReservation>
                 :
                 <></>
@@ -128,7 +126,7 @@ export default function Payment() {
             <OnlineConfirmation>
               { ispicked === 2 ?
                 <>
-                  <p>Fechado! O total ficou em <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
+                  <p>Fechado! O total ficou em R$ <strong>{selected[1].value}</strong>. Agora é só confirmar.</p>
                   <button onClick={() => setFinish(true)}>RESERVAR INGRESSO</button>
                 </>
                 :
@@ -233,10 +231,29 @@ const TicketsContainer = styled.div`
    width:  165px;
    
 `;
+
 const ConfirmReservation = styled.div`
 display:flex;
 flex-direction: column; 
+
+button{
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border: none;
+  font-family: 'Roboto';
+  margin-top: 1rem;
+  color: black;
+  width: 10rem;
+  height: 2.4rem;
+  font-size: 14px;
+  transition: .2s ease-in-out;
+}
+button:active{
+  transform: scale(0.98);
+}
 `;
+
 const Pedido = styled.div` 
   font-family: 'Roboto'; 
   font-style: normal; 
@@ -260,6 +277,7 @@ h2{
   font-size: 20px; 
   margin-top: 24px;
 } 
+
 `;
 const Buttom = styled.div` 
   width: 162px; 
