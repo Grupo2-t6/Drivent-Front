@@ -186,5 +186,4 @@ const PaymentContainer = styled.div`
 const TicketsContainer = styled.div`
    margin-top: 2%;
    width:  165px;
-
 `;  
