@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 export default function Ticket({ value, type, uniqueValue, picked }) {
-
   return (
     <TickerBody background={picked ? '#FFEED2' : ' #FFFFFF'}>
       <TicketContent>

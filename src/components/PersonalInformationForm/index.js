@@ -59,7 +59,7 @@ export default function PersonalInformationForm() {
         phone: data.phone.replace(/[^0-9]+/g, '').replace(/^(\d{2})(9?\d{4})(\d{4})$/, '($1) $2-$3'),
       };
 
-      console.log(data.birthday)
+      console.log(data.birthday);
 
       try {
         await saveEnrollment(newData);
