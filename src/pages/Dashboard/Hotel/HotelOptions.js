@@ -35,7 +35,6 @@ export default function HotelOptions() {
         <h3>Primeiro, escolha seu hotel</h3>
         <HotelFlex>
           {options.map((e, index) => {
-            let code = e.key;
             return (
               <HotelContent onClick={e => handleSelect(index, HotelOptionsData)}>
                 <HotelTicket
