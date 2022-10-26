@@ -1,3 +1,8 @@
+import HotelOptions from './HotelOptions';
 export default function Hotel() {
-  return 'Hotel: Em breve!';
+  return (
+    <>
+      <HotelOptions />
+    </>
+  );
 }
