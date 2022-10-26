@@ -10,8 +10,23 @@ import {
 export default function HotelOptions() {
   const [options, setOptions] = useState(HotelOptionsData);
 
-  const handleSelect = (elementIndex) => {
-    console.log('clicou em ' + elementIndex);
+  const handleSelect = (elementIndex, object) => {
+    let newData = [];
+    object.map((value, index) => {
+      if (index === elementIndex) {
+        const data = {
+          ...value,
+          picked: true
+        };
+        newData.push(data);
+      } else {
+        const data = {
+          ...value
+        };
+        newData.push(data);
+      };
+    });
+    setOptions(newData);
   };
   return (
     <>
@@ -22,13 +37,14 @@ export default function HotelOptions() {
           {options.map((e, index) => {
             let code = e.key;
             return (
-              <HotelContent onClick={e => handleSelect(index)}>
+              <HotelContent onClick={e => handleSelect(index, HotelOptionsData)}>
                 <HotelTicket
                   name={e.name}
                   vacancies={e.vacancies}
                   accomodation={e.accommodation}
                   img={e.image}
                   key={index}
+                  picked={e.picked}
                 />
               </HotelContent>
             );

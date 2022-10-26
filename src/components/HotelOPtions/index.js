@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function HotelTicket({ name, img, accomodation, vacancies }) {
+export default function HotelTicket({ name, img, accomodation, vacancies, picked }) {
   return (
-    <HotelOption>
+    <HotelOption  background={picked ? '#FFEED2' : ' #F1F1F1'}>
       <div>
         <img src={img} alt='hotel 1' />
       </div>
@@ -16,11 +16,10 @@ export default function HotelTicket({ name, img, accomodation, vacancies }) {
 };
 
 const HotelOption = styled.div`
-background-color: pink;
 margin-right: 20px;
 width: 196px;
 height: 264px;
-background: #F1F1F1;
+background-color: ${(props) => props.background};
 border-radius: 10px;
 div{
   display: flex;
