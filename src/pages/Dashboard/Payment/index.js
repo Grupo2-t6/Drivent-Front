@@ -127,11 +127,11 @@ export default function Payment() {
         </>
         :
         <>
-          <Informations type={ispicked} value={sum} hotel={withHotel} />
+          <Informations type={ispicked} value={sum} hotel={withHotel} ispicked={ispicked}/>
           {isApproved ?
             <PaymentConfirm/>
             :
-            <CreditCardData setIsApproved={setIsApproved}/>
+            <CreditCardData setIsApproved={setIsApproved} hotel={withHotel}/>
           }
         </>
       }

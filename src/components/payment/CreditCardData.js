@@ -9,7 +9,7 @@ import useToken from '../../hooks/useToken';
 import { useNavigate } from 'react-router-dom';
 import { creditCardApi } from '../../services/creditCardApi';
 
-export default function CreditCardData({ setIsApproved }) {
+export default function CreditCardData({ setIsApproved, hotel, ispicked }) {
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [expiry, setExpiry] = useState('');
@@ -18,8 +18,15 @@ export default function CreditCardData({ setIsApproved }) {
 
   const navigate = useNavigate();
   const token = useToken();
-  const value = 50;
+  let value = 250;
 
+  if(hotel) {
+    value=600;
+  };
+  if(ispicked) {
+    value=100;
+  };
+  console.log(value);
   const thisMonth = dayjs(new Date()).format('YYYY-MM');
 
   useEffect(() => {
