@@ -1,47 +1,65 @@
 import styled from 'styled-components';
 
-export default function Ticket({ value, type, uniqueValue, picked }) {
+export default function HotelTicket({ name, img, accomodation, vacancies }) {
   return (
-    <TickerBody background={picked ? '#FFEED2' : ' #FFFFFF'}>
-      <TicketContent>
-        <h2>{type}</h2>
-        <h4>R${value}</h4>
-      </TicketContent>
-    </TickerBody>
+    <HotelOption>
+      <div>
+        <img src={img} alt='hotel 1' />
+      </div>
+      <HotelName>{name}</HotelName>
+      <h4>Tipos de acomodação:</h4>
+      <HotelInfo>{accomodation}</HotelInfo>
+      <h4>Vagas disponíveis:</h4>
+      <HotelInfo>{vacancies}</HotelInfo>
+    </HotelOption>
   );
 };
 
-const TickerBody = styled.div`
-  width: 145px;
-  height: 145px;
-  border: 1px solid #CECECE;
-  border-radius: 20px;
+const HotelOption = styled.div`
+background-color: pink;
+margin-right: 20px;
+width: 196px;
+height: 264px;
+background: #F1F1F1;
+border-radius: 10px;
+div{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${(props) => props.background};
+}
+img{
+  margin-top: 6%;
+}
+h4{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  margin-left: 7%;
+  margin-top: 10px;
+  color: #3C3C3C;
+}
+
 `;
 
-const TicketContent = styled.div`
-display: flex;
-flex-direction: column;
-margin-top: 35%;
-  h2{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    color: #454545;
-  }
-  h4{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: center;
-    color: #898989;
-  }
+const HotelName = styled.h2`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #343434;
+  margin-left: 7%;
 `;
+
+const HotelInfo = styled.h5`
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+color: #3C3C3C;
+margin-left: 7%;
+`; 
+

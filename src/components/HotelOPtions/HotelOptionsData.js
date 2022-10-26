@@ -1,6 +1,6 @@
 import hotel1 from '../../assets/images/hotel1.svg';
 import hotel2 from '../../assets/images/hotel2.svg'; 
-import hotel3 from '../../assets/images/hotel3.svg';
+import hotel3 from '../../assets/images/hotel3.png';
 
 const HotelOptionsData = [
   {

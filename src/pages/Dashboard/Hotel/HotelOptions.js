@@ -1,50 +1,39 @@
-import hotel1 from '../../../assets/images/hotel1.svg';
-import { 
-  HotelContainer, 
+import { useState } from 'react';
+import HotelTicket from '../../../components/HotelOPtions';
+import HotelOptionsData from '../../../components/HotelOPtions/HotelOptionsData';
+import {
+  HotelContainer,
   HotelContent,
-  HotelOption,
-  HotelName,
-  HotelInfo,
+  HotelFlex
 } from './style';
 
 export default function HotelOptions() {
+  const [options, setOptions] = useState(HotelOptionsData);
+
+  const handleSelect = (elementIndex) => {
+    console.log('clicou em ' + elementIndex);
+  };
   return (
     <>
       <HotelContainer>
         <h1>Escolha de hotel e quarto</h1>
         <h3>Primeiro, escolha seu hotel</h3>
-        <HotelContent>
-          <HotelOption>
-            <div>
-              <img src={hotel1} alt='hotel 1' />
-            </div>
-            <HotelName>Driven Resort</HotelName>
-            <h4>Tipos de acomodação:</h4>
-            <HotelInfo>Single e Double</HotelInfo>
-            <h4>Vagas disponíveis:</h4>
-            <HotelInfo>103</HotelInfo>
-          </HotelOption>
-          <HotelOption>
-            <div>
-              <img src={hotel1} alt='hotel 1' />
-            </div>
-            <HotelName>Driven Resort</HotelName>
-            <h4>Tipos de acomodação:</h4>
-            <HotelInfo>Single e Double</HotelInfo>
-            <h4>Vagas disponíveis:</h4>
-            <HotelInfo>103</HotelInfo>
-          </HotelOption>
-          <HotelOption>
-            <div>
-              <img src={hotel1} alt='hotel 1' />
-            </div>
-            <HotelName>Driven Resort</HotelName>
-            <h4>Tipos de acomodação:</h4>
-            <HotelInfo>Single e Double</HotelInfo>
-            <h4>Vagas disponíveis:</h4>
-            <HotelInfo>103</HotelInfo>
-          </HotelOption>
-        </HotelContent>
+        <HotelFlex>
+          {options.map((e, index) => {
+            let code = e.key;
+            return (
+              <HotelContent onClick={e => handleSelect(index)}>
+                <HotelTicket
+                  name={e.name}
+                  vacancies={e.vacancies}
+                  accomodation={e.accommodation}
+                  img={e.image}
+                  key={index}
+                />
+              </HotelContent>
+            );
+          })}
+        </HotelFlex>
       </HotelContainer>
     </>
   );
