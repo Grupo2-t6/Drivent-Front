@@ -30,6 +30,9 @@ margin-top: 2%;
 const HotelFlex = styled.div`
 margin-top: 2%;
 display: flex;
+@media (max-width:760px) {
+    flex-direction:column;
+  }
 
 `;
 

@@ -9,7 +9,7 @@ import {
 
 export default function HotelOptions() {
   const [options, setOptions] = useState(HotelOptionsData);
-
+  
   const handleSelect = (elementIndex, object) => {
     let newData = [];
     object.map((value, index) => {
