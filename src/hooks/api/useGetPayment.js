@@ -3,5 +3,6 @@ import useToken from '../../hooks/useToken';
 
 export async function useGetPayment() {
   const token = useToken();
-  const value = await getPayment(token);
+  const valueTicket = await getPayment(token);
+  return valueTicket;
 }  

@@ -1,20 +1,21 @@
 import HotelOptions from './HotelOptions';
+import NotHosting from './NotHosting';
 import { useGetPayment } from '../../../hooks/api/useGetPayment';
 import { useState, useEffect } from 'react';
 
-export default  function Hotel() {
+export default function Hotel() {
   const [valueHotel, setValueHotel] = useState('');
 
-  async function value() {
+  async function getvalue() {
     const value = await useGetPayment();
   };
  
-  setValueHotel(value());
+  // setValueHotel(getvalue());
   
   console.log(valueHotel);
   return (
     <>
-      <HotelOptions />
+      <NotHosting />
     </>
   );
 }

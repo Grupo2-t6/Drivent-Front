@@ -16,7 +16,7 @@ h3{
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    margin-top: 18px;
+    c
     line-height: 23px;
     color: #8E8E8E;
   }
@@ -35,9 +35,19 @@ display: flex;
   }
 
 `;
+const NotHostingStyle = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 0;
+  `;
 
 export {
   HotelContainer,
   HotelContent,
-  HotelFlex
+  HotelFlex,
+  NotHostingStyle
 }; 
