@@ -16,7 +16,6 @@ h3{
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    c
     line-height: 23px;
     color: #8E8E8E;
   }

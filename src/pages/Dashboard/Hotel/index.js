@@ -1,21 +1,36 @@
 import HotelOptions from './HotelOptions';
 import NotHosting from './NotHosting';
-import { useGetPayment } from '../../../hooks/api/useGetPayment';
+import { UseGetPayment } from '../../../hooks/api/useGetPayment';
 import { useState, useEffect } from 'react';
+import useToken from '../../../hooks/useToken';
+import { useNavigate } from 'react-router-dom';
 
 export default function Hotel() {
-  const [valueHotel, setValueHotel] = useState('');
+  const navigate = useNavigate();
 
-  async function getvalue() {
-    const value = await useGetPayment();
-  };
- 
-  // setValueHotel(getvalue());
-  
-  console.log(valueHotel);
+  const [valueHotel, setValueHotel] = useState('');
+  const token = 'useToken()';
+  async function getTicktvalue() {
+    const ticketValue = await UseGetPayment(token);
+    setValueHotel(ticketValue.data);
+  }
+
+  useEffect(() => {
+    if(token.length===0 || !token) {
+      navigate('/sign-in');
+    }
+    else{
+      getTicktvalue();
+    }
+  }, [setValueHotel, UseGetPayment, token]);
+
   return (
     <>
-      <NotHosting />
+      { valueHotel===600 ?
+        <HotelOptions/>
+        :
+        <NotHosting value={valueHotel}/>
+      }
     </>
   );
 }

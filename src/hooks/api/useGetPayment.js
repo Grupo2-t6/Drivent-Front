@@ -1,8 +1,6 @@
 import { getPayment } from '../../services/getPaymentApi';
-import useToken from '../../hooks/useToken';
 
-export async function useGetPayment() {
-  const token = useToken();
+export async function UseGetPayment(token) {
   const valueTicket = await getPayment(token);
   return valueTicket;
 }  
