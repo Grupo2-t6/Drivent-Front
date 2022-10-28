@@ -113,37 +113,46 @@ function RoomBox(props) {
     </>
   );
 }
-export default function ReserveRoom() {
+export default function ReserveRoom(props) {
   const[reserveButton, setReserveButton] = useState(false);
+  let hotelIndex = 0;
+  if(props.hotelIndex  !== null) {
+    hotelIndex = props.hotelIndex;
+  }
   return (
-    <Container>
-      <h3>Ótima pedida! Agora escolha seu quarto:</h3>
-      <BoxContainer>{roomsData[0].rooms.map((item) => <RoomBox number={item.number} 
-        guest={item.guest} 
-        busy={item.busy} 
-        setButton = {setReserveButton} 
-        reserveButton = {reserveButton}/>)}
-      </BoxContainer>
-      { (reserveButton === true) ?
-        <Buttom onClick={() => alert('em manutenção')}>
-          <h3>Reservar Quarto</h3>
-        </Buttom>
-        :
-        null
+    <>
+      {
+        (props.hotelIndex !== null) ?
+          <Container>
+            <h3>Ótima pedida! Agora escolha seu quarto:</h3>
+            <BoxContainer>{roomsData[hotelIndex].rooms.map((item) => <RoomBox number={item.number} 
+              guest={item.guest} 
+              busy={item.busy} 
+              setButton = {setReserveButton} 
+              reserveButton = {reserveButton}/>)}
+            </BoxContainer>
+            { (reserveButton === true) ?
+              <Buttom onClick={() => alert('em manutenção')}>
+                <h3>Reservar Quarto</h3>
+              </Buttom>
+              :
+              null
+            } 
+          </Container>
+          : 
+          null
       }
-     
-    </Container>
+    </>
   );
 }
 
 const Container = styled.div`
-
+margin-top: 50px;
 h3{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    margin-top: 20px;
     line-height: 23px;
     color: #8E8E8E;
   }
@@ -175,7 +184,7 @@ h2{
     font-style: normal;
     font-weight: 700;
     font-size: 17px;
-    margin-top: 12px;
+    margin-top: 15px;
     margin-left: 10px;
 }
 
@@ -197,7 +206,7 @@ font-family: 'Roboto';
 font-style: normal;
 font-weight: 700;
 font-size: 17px;
-margin-top: 12px;
+margin-top: 15px;
 margin-left: 10px;
 color: #9D9D9D;
 }
@@ -253,7 +262,6 @@ const Buttom = styled.div`
   text-align: center; 
   color: #000000; 
   width: 100%;
-  padding-bottom: 10px;
   } 
 `
   ;
