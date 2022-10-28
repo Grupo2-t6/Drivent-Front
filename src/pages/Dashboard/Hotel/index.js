@@ -1,6 +1,8 @@
-import ReserveRoom from '../../../components/rooms/Bedroom';
+import HotelOptions from './HotelOptions';
 export default function Hotel() {
   return (
-    <ReserveRoom/>
+    <>
+      <HotelOptions />
+    </>
   );
 }
