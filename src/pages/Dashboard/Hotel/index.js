@@ -9,10 +9,13 @@ export default function Hotel() {
   const navigate = useNavigate();
 
   const [valueHotel, setValueHotel] = useState('');
-  const token = 'useToken()';
+  const token = useToken();
+  
   async function getTicktvalue() {
     const ticketValue = await UseGetPayment(token);
-    setValueHotel(ticketValue.data);
+    if(ticketValue.data) {
+      setValueHotel(ticketValue.data.ticketValue);
+    };
   }
 
   useEffect(() => {
