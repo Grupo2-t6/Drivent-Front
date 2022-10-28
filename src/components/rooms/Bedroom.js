@@ -1,12 +1,15 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import roomsData from './roomData';
+import RoomContext from '../../contexts/RoomContext';
+import GuestContext from '../../contexts/guestContext';
+import OccupationContext from '../../contexts/OccupationContext';
 
 function RenderIcons(props) {
   return (
     <>
       {
-       
+
         (props.busy === 0) ?
           (props.painted === true) ?
             <IconsPink>
@@ -26,35 +29,43 @@ function RenderIcons(props) {
   );
 }
 function RoomBox(props) {
-  const[picked, setPicked] = useState (false);
-  if(picked === true) {
+  const { setRoomInfo } = useContext(RoomContext);
+  const { setGuestInfo } = useContext(GuestContext);
+  const { setOccupation } = useContext(OccupationContext);
+  const [picked, setPicked] = useState(false);
+
+  if (picked === true) {
     props.setButton(true);
+    setRoomInfo(props.number);
+    setGuestInfo(props.type);
+    setOccupation(props.occupation);
   }
   function selectedRoom() {
-    if(props.reserveButton === false) {
+    if (props.reserveButton === false) {
       setPicked(true);
     }
   }
+  
   return (
     <>
       {(picked === true) ?
 
-        <Box className = 'painted' onClick={selectedRoom}>
-     
+        <Box className='painted' onClick={() => selectedRoom(props.hotelKey)}>
+
           <h2>{props.number}</h2>
           <BoxIcons>
             {
               (props.guest === 1) ?
-                <RenderIcons busy={props.busy} painted = {picked} />
+                <RenderIcons busy={props.busy} painted={picked} />
                 :
                 (props.guest === 2) ?
                   <>
-                    <RenderIcons busy={props.busy} painted = {picked}/>
-                    <RenderIcons busy={props.busy}/>
+                    <RenderIcons busy={props.busy} painted={picked} />
+                    <RenderIcons busy={props.busy} />
                   </>
                   :
                   <>
-                    <RenderIcons busy={props.busy} painted = {picked}/>
+                    <RenderIcons busy={props.busy} painted={picked} />
                     <RenderIcons busy={props.busy} />
                     <RenderIcons busy={props.busy} />
                   </>
@@ -63,9 +74,9 @@ function RoomBox(props) {
         </Box>
         :
         (props.guest - props.busy !== 0) ?
-       
+
           <Box onClick={selectedRoom}>
-     
+
             <h2>{props.number}</h2>
             <BoxIcons>
               {
@@ -85,10 +96,10 @@ function RoomBox(props) {
               }
             </BoxIcons>
           </Box>
-    
+
           :
           <Box2>
-     
+
             <h2>{props.number}</h2>
             <BoxIcons>
               {
@@ -109,14 +120,14 @@ function RoomBox(props) {
             </BoxIcons>
           </Box2>
       }
-    
+
     </>
   );
 }
 export default function ReserveRoom(props) {
-  const[reserveButton, setReserveButton] = useState(false);
+  const [reserveButton, setReserveButton] = useState(false);
   let hotelIndex = 0;
-  if(props.hotelIndex  !== null) {
+  if (props.hotelIndex !== null) {
     hotelIndex = props.hotelIndex;
   }
   return (
@@ -125,21 +136,24 @@ export default function ReserveRoom(props) {
         (props.hotelIndex !== null) ?
           <Container>
             <h3>Ótima pedida! Agora escolha seu quarto:</h3>
-            <BoxContainer>{roomsData[hotelIndex].rooms.map((item) => <RoomBox number={item.number} 
-              guest={item.guest} 
-              busy={item.busy} 
-              setButton = {setReserveButton} 
-              reserveButton = {reserveButton}/>)}
+            <BoxContainer>{roomsData[hotelIndex].rooms.map((item, index) => <RoomBox  number={item.number}
+              guest={item.guest}
+              type={item.type}
+              occupation={item.occupation}
+              hotelKey={index}
+              busy={item.busy}
+              setButton={setReserveButton}
+              reserveButton={reserveButton} />)}
             </BoxContainer>
-            { (reserveButton === true) ?
+            {(reserveButton === true) ?
               <Buttom onClick={() => props.setHotelPage(1)}>
                 <h3>Reservar Quarto</h3>
               </Buttom>
               :
               null
-            } 
+            }
           </Container>
-          : 
+          :
           null
       }
     </>
@@ -212,7 +226,7 @@ color: #9D9D9D;
 }
 
 `
-;
+  ;
 
 const Icons = styled.div`
 
@@ -222,7 +236,7 @@ ion-icon{
     height: 20px; 
 }
 `;
-const   SelectedIcons = styled.div`
+const SelectedIcons = styled.div`
 
 ion-icon{
     margin-top: 12px;
@@ -231,7 +245,7 @@ ion-icon{
     color: #8C8C8C;
 }
 `;
-const   IconsPink = styled.div`
+const IconsPink = styled.div`
 
 ion-icon{
     margin-top: 12px;
@@ -240,7 +254,7 @@ ion-icon{
     color: #FF4791;
 }
 `;
-const BoxIcons=styled.div`
+const BoxIcons = styled.div`
 
 display:flex;
 `;

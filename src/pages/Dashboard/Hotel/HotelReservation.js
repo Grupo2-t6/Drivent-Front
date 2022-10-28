@@ -1,7 +1,6 @@
 import { Buttom, HotelContainer, HotelContent, HotelInfo, HotelName, HotelPicked } from './style';
 
 export default function HotelReservation(props) {
-  console.log(props.hotelPicked);
   return (
     <>
       <HotelContainer>
@@ -15,9 +14,9 @@ export default function HotelReservation(props) {
           </div>
           <HotelName>{props.hotelPicked.name}</HotelName>
           <h4>Quarto reservado</h4>
-          <HotelInfo>101 (Double)</HotelInfo>
+          <HotelInfo>{props.roomInfo} {props.occupation}</HotelInfo>
           <h4>Pessoas no seu quarto</h4>
-          <HotelInfo>Você e mais 1</HotelInfo>
+          <HotelInfo>{props.guestInfo}</HotelInfo>
         </HotelPicked>
       </HotelContent>
       <Buttom onClick={() => props.setHotelPage(0)}>
