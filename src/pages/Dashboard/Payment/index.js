@@ -51,6 +51,7 @@ export default function Payment() {
         hotelNewData.push(data);
       }
     });
+    
     if (type === 'presencial') setIspicked(true);
     if (type === 'online') setIspicked(false);
     if (keyIndex === elementIndex + 3) setSelectedHotel(hotelNewData);
