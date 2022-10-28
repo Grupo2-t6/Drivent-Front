@@ -15,6 +15,7 @@ export default function HotelOptions(props) {
     object.map((value, index) => {
       if (index === elementIndex) {
         props.setHotelIndex(index);
+        props.setHotelPicked(value);
         const data = {
           ...value,
           picked: true

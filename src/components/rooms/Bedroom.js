@@ -132,7 +132,7 @@ export default function ReserveRoom(props) {
               reserveButton = {reserveButton}/>)}
             </BoxContainer>
             { (reserveButton === true) ?
-              <Buttom onClick={() => alert('em manutenção')}>
+              <Buttom onClick={() => props.setHotelPage(1)}>
                 <h3>Reservar Quarto</h3>
               </Buttom>
               :
