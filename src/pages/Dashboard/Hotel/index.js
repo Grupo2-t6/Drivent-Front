@@ -33,8 +33,6 @@ export default function Hotel() {
           roomInfo={roomInfo}
           guestInfo={guestInfo}
           occupation={occupation} />
-      }
     </>
   );
 }
-
