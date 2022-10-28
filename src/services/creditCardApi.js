@@ -1,4 +1,5 @@
 import api from './api';
+import { toast } from 'react-toastify';
 
 export async function creditCardApi(paymentData, token) {
   try{
@@ -11,7 +12,10 @@ export async function creditCardApi(paymentData, token) {
     return isApproved;
   }catch(err) {
     console.log(err.response.status);
-    console.log(err.response.data);
+    const statusErr = err.response.status;
+    if(statusErr === 409) {
+      toast('Ingresso já comprado!');
+    }
     return false;
   }
 }

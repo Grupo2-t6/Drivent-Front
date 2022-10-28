@@ -26,7 +26,6 @@ export default function CreditCardData({ setIsApproved, hotel, ispicked }) {
   if(ispicked) {
     value=100;
   };
-  console.log(value);
   const thisMonth = dayjs(new Date()).format('YYYY-MM');
 
   useEffect(() => {
