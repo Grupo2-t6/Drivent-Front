@@ -18,7 +18,7 @@ const roomsData = [
       { number: 600, guest: 2, busy: 0, type: 'Você e mais 1 pessoa', occupation: '(Double)' },
       { number: 701, guest: 2, busy: 0, type: 'Você e mais 1 pessoa', occupation: '(Double)' },
       { number: 702, guest: 1, busy: 0, type: 'somente Você', occupation: '(Single)' },
-      { number: 802, guest: 2, busy: 0, type: 'Você e mais 1 oessoa', occupation: '(Double)' },
+      { number: 802, guest: 2, busy: 0, type: 'Você e mais 1 pessoa', occupation: '(Double)' },
       { number: 804, guest: 3, busy: 3 }
     ] },
   { 
