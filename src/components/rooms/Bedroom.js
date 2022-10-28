@@ -2,38 +2,136 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import roomsData from './roomData';
 
-function RoomBox(props) {
+function RenderIcons(props) {
   return (
-    <Box>
-      <h2>{props.number}</h2>
+    <>
       {
-        (props.guest === 1) ?
-          <Icones>
-            <ion-icon name="person-outline"></ion-icon>
-          </Icones>
-          :
-          (props.guest === 2) ?
-            <Icones>
-              <ion-icon name="person-outline"></ion-icon>
-              <ion-icon name="person-outline"></ion-icon>
-            </Icones>
+       
+        (props.busy === 0) ?
+          (props.painted === true) ?
+            <IconsPink>
+              <ion-icon className='pink' name="person"></ion-icon>
+            </IconsPink>
             :
-            <Icones>
+            <Icons >
               <ion-icon name="person-outline"></ion-icon>
-              <ion-icon name="person-outline"></ion-icon>
-              <ion-icon name="person-outline"></ion-icon>
-            </Icones>
+            </Icons>
+          :
+          <SelectedIcons>
+            <ion-icon name="person"></ion-icon>
+          </SelectedIcons>
       }
 
-    </Box>
+    </>
+  );
+}
+function RoomBox(props) {
+  const[picked, setPicked] = useState (false);
+  if(picked === true) {
+    props.setButton(true);
+  }
+  function selectedRoom() {
+    if(props.reserveButton === false) {
+      setPicked(true);
+    }
+  }
+  return (
+    <>
+      {(picked === true) ?
 
+        <Box className = 'painted' onClick={selectedRoom}>
+     
+          <h2>{props.number}</h2>
+          <BoxIcons>
+            {
+              (props.guest === 1) ?
+                <RenderIcons busy={props.busy} painted = {picked} />
+                :
+                (props.guest === 2) ?
+                  <>
+                    <RenderIcons busy={props.busy} painted = {picked}/>
+                    <RenderIcons busy={props.busy}/>
+                  </>
+                  :
+                  <>
+                    <RenderIcons busy={props.busy} painted = {picked}/>
+                    <RenderIcons busy={props.busy} />
+                    <RenderIcons busy={props.busy} />
+                  </>
+            }
+          </BoxIcons>
+        </Box>
+        :
+        (props.guest - props.busy !== 0) ?
+       
+          <Box onClick={selectedRoom}>
+     
+            <h2>{props.number}</h2>
+            <BoxIcons>
+              {
+                (props.guest === 1) ?
+                  <RenderIcons busy={props.busy} />
+                  :
+                  (props.guest === 2) ?
+                    <>
+                      <RenderIcons busy={props.busy} /><RenderIcons busy={props.busy} />
+                    </>
+                    :
+                    <>
+                      <RenderIcons busy={props.busy} />
+                      <RenderIcons busy={props.busy} />
+                      <RenderIcons busy={props.busy} />
+                    </>
+              }
+            </BoxIcons>
+          </Box>
+    
+          :
+          <Box2>
+     
+            <h2>{props.number}</h2>
+            <BoxIcons>
+              {
+                (props.guest === 1) ?
+                  <RenderIcons busy={props.busy} />
+                  :
+                  (props.guest === 2) ?
+                    <>
+                      <RenderIcons busy={props.busy} /><RenderIcons busy={props.busy} />
+                    </>
+                    :
+                    <>
+                      <RenderIcons busy={props.busy} />
+                      <RenderIcons busy={props.busy} />
+                      <RenderIcons busy={props.busy} />
+                    </>
+              }
+            </BoxIcons>
+          </Box2>
+      }
+    
+    </>
   );
 }
 export default function ReserveRoom() {
+  const[reserveButton, setReserveButton] = useState(false);
   return (
     <Container>
       <h3>Ótima pedida! Agora escolha seu quarto:</h3>
-      <BoxContainer>{roomsData[0].rooms.map((item) => <RoomBox number={item.number} guest={item.guest} />)}</BoxContainer>
+      <BoxContainer>{roomsData[0].rooms.map((item) => <RoomBox number={item.number} 
+        guest={item.guest} 
+        busy={item.busy} 
+        setButton = {setReserveButton} 
+        reserveButton = {reserveButton}/>)}
+      </BoxContainer>
+      { (reserveButton === true) ?
+        <Buttom onClick={() => alert('em manutenção')}>
+          <h3>Reservar Quarto</h3>
+        </Buttom>
+        :
+        null
+      }
+     
     </Container>
   );
 }
@@ -55,6 +153,11 @@ const BoxContainer = styled.div`
   grid-template-rows: 60px 60px 60px 60px;
   grid-auto-flow: column;
   margin-top: 20px;
+
+  .painted{
+      background: #FFEED2;
+    }
+
 `;
 const Box = styled.div`
     width: 190px;
@@ -64,7 +167,8 @@ const Box = styled.div`
     display: flex;
     justify-content: space-between;
 
-
+   
+  
 h2{
 
     font-family: 'Roboto';
@@ -77,17 +181,79 @@ h2{
 
 `
   ;
-const Icones = styled.div`
+
+const Box2 = styled.div`
+width: 190px;
+height: 45px;
+border: 1px solid #CECECE;
+border-radius: 10px;
+display: flex;
+justify-content: space-between;
+background-color: #E9E9E9;
+
+h2{
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 17px;
+margin-top: 12px;
+margin-left: 10px;
+color: #9D9D9D;
+}
+
+`
+;
+
+const Icons = styled.div`
 
 ion-icon{
     margin-top: 12px;
-    color: #000000;
+    width: 20px;
+    height: 20px; 
+}
+`;
+const   SelectedIcons = styled.div`
+
+ion-icon{
+    margin-top: 12px;
     width: 20px;
     height: 20px;
+    color: #8C8C8C;
 }
-    `;
-<Icones>
-  <ion-icon name="person-outline"></ion-icon>
-  <ion-icon name="person-outline"></ion-icon>
-  <ion-icon name="person-outline"></ion-icon>
-</Icones>;
+`;
+const   IconsPink = styled.div`
+
+ion-icon{
+    margin-top: 12px;
+    width: 20px;
+    height: 20px;
+    color: #FF4791;
+}
+`;
+const BoxIcons=styled.div`
+
+display:flex;
+`;
+const Buttom = styled.div` 
+  width: 162px; 
+  height: 37px; 
+  background: #E0E0E0; 
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25); 
+  border-radius: 4px; 
+  display: flex; 
+  align-items: center; 
+  margin-top: 20px; 
+
+  h3{ 
+  font-family: 'Roboto'; 
+  font-style: normal; 
+  font-weight: 400; 
+  font-size: 14px; 
+  text-align: center; 
+  color: #000000; 
+  width: 100%;
+  padding-bottom: 10px;
+  } 
+`
+  ;
