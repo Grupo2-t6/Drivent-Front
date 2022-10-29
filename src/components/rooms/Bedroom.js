@@ -4,6 +4,7 @@ import roomsData from './roomData';
 import RoomContext from '../../contexts/RoomContext';
 import GuestContext from '../../contexts/guestContext';
 import OccupationContext from '../../contexts/OccupationContext';
+import useHotel from '../../hooks/api/useHotel';
 
 function RenderIcons(props) {
   return (
@@ -38,14 +39,14 @@ function RoomBox(props) {
     props.setButton(true);
     setRoomInfo(props.number);
     setGuestInfo(props.type);
-    setOccupation(props.occupation);
+    setOccupation(props.occupation); 
   }
   function selectedRoom() {
     if (props.reserveButton === false) {
       setPicked(true);
     }
   }
-  
+
   return (
     <>
       {(picked === true) ?
@@ -136,9 +137,10 @@ export default function ReserveRoom(props) {
         (props.hotelIndex !== null) ?
           <Container>
             <h3>Ótima pedida! Agora escolha seu quarto:</h3>
-            <BoxContainer>{roomsData[hotelIndex].rooms.map((item, index) => <RoomBox  number={item.number}
+            <BoxContainer>{roomsData[hotelIndex].rooms.map((item, index) => <RoomBox number={item.number}
               guest={item.guest}
               type={item.type}
+              hotel={props.hotelPicked}
               occupation={item.occupation}
               hotelKey={index}
               busy={item.busy}
@@ -146,7 +148,7 @@ export default function ReserveRoom(props) {
               reserveButton={reserveButton} />)}
             </BoxContainer>
             {(reserveButton === true) ?
-              <Buttom onClick={() => props.setHotelPage(1)}>
+              <Buttom onClick={() => props.setReserve(true)}>
                 <h3>Reservar Quarto</h3>
               </Buttom>
               :
