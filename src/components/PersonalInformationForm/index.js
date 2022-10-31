@@ -42,7 +42,6 @@ export default function PersonalInformationForm() {
     validations: FormValidations,
 
     onSubmit: async(data) => {
-      console.log(data);
       const newData = {
         name: data.name,
         cpf: data.cpf.replaceAll('.', '').replaceAll('-', ''),

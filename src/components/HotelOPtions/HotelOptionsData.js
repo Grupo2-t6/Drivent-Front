@@ -7,7 +7,7 @@ const HotelOptionsData = [
     image: hotel1, 
     name: 'Driven Resort', 
     accommodation: 'Single e Double', 
-    vacancies: 103,
+    vacancies: 12,
     picked: false, 
     key: 3 
   },

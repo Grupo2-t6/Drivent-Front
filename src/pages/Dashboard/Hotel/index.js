@@ -1,40 +1,45 @@
 import HotelOptions from './HotelOptions';
-import NotHosting from './NotHosting';
-import { UseGetPayment } from '../../../hooks/api/useGetPayment';
-import { useState, useEffect } from 'react';
-import useToken from '../../../hooks/useToken';
-import { useNavigate } from 'react-router-dom';
+import ReserveRoom from '../../../components/rooms/Bedroom';
+import { useState } from 'react';
+import HotelReservation from './HotelReservation';
+import RoomContext from '../../../contexts/RoomContext';
+import GuestContext from '../../../contexts/guestContext';
+import OccupationContext from '../../../contexts/OccupationContext';
 
 export default function Hotel() {
-  const navigate = useNavigate();
-
-  const [valueHotel, setValueHotel] = useState('');
-  const token = useToken();
-  
-  async function getTicktvalue() {
-    const ticketValue = await UseGetPayment(token);
-    if(ticketValue.data) {
-      setValueHotel(ticketValue.data.ticketValue);
-    };
-  }
-
-  useEffect(() => {
-    if(token.length===0 || !token) {
-      navigate('/sign-in');
-    }
-    else{
-      getTicktvalue();
-    }
-  }, [setValueHotel, UseGetPayment, token]);
+  const [hotelIndex, setHotelIndex] = useState(null);
+  const [reserve, setReserve] = useState(false);
+  const [hotelPicked, setHotelPicked] = useState([]);
+  const [data, setData] = useState([]);
+  const [roomInfo, setRoomInfo] = useState('');
+  const [guestInfo, setGuestInfo] = useState('');
+  const [occupation, setOccupation] = useState('');
 
   return (
     <>
-      { valueHotel===600 ?
-        <HotelOptions/>
+      {(reserve === false) ?
+        <>
+          <OccupationContext.Provider value={{ occupation, setOccupation }}>
+            <GuestContext.Provider value={{ guestInfo, setGuestInfo }}>
+              <RoomContext.Provider value={{ roomInfo, setRoomInfo }}>
+                <HotelOptions data={data} setHotelIndex={setHotelIndex} setHotelPicked={setHotelPicked} />
+                <ReserveRoom data={data} hotelIndex={hotelIndex} setReserve={setReserve} hotelPicked={hotelPicked} />
+              </RoomContext.Provider>
+            </GuestContext.Provider>
+          </OccupationContext.Provider>
+        </>
         :
-        <NotHosting value={valueHotel}/>
+        <HotelReservation
+          hotelPicked={hotelPicked}
+          setData={setData}
+          data={data}
+          roomInfo={roomInfo}
+          guestInfo={guestInfo}
+          setReserve={setReserve}
+          reserve={reserve}
+          occupation={occupation} />
       }
     </>
   );
-}
+};
 

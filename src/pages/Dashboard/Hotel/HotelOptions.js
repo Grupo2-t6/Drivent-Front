@@ -7,15 +7,18 @@ import {
   HotelFlex
 } from './style';
 
-export default function HotelOptions() {
+export default function HotelOptions(props) {
   const [options, setOptions] = useState(HotelOptionsData);
   const handleSelect = (elementIndex, object) => {
     let newData = [];
     object.map((value, index) => {
       if (index === elementIndex) {
+        props.setHotelIndex(index);
+        props.setHotelPicked(value);
         const data = {
           ...value,
           picked: true
+         
         };
         newData.push(data);
       } else {
@@ -27,6 +30,7 @@ export default function HotelOptions() {
     });
     setOptions(newData);
   };
+  console.log(props.data);
   return (
     <>
       <HotelContainer>
