@@ -9,7 +9,6 @@ import {
 
 export default function HotelOptions(props) {
   const [options, setOptions] = useState(HotelOptionsData);
-
   const handleSelect = (elementIndex, object) => {
     let newData = [];
     object.map((value, index) => {
@@ -38,7 +37,6 @@ export default function HotelOptions(props) {
         <h3>Primeiro, escolha seu hotel</h3>
         <HotelFlex>
           {options.map((e, index) => {
-            let code = e.key;
             return (
               <HotelContent onClick={e => handleSelect(index, HotelOptionsData)}>
                 <HotelTicket
