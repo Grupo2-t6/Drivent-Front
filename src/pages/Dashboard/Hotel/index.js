@@ -15,61 +15,31 @@ export default function Hotel() {
   const [guestInfo, setGuestInfo] = useState('');
   const [occupation, setOccupation] = useState('');
 
-  if (data.length === 0) {
-    return (
-      <>
-        {(reserve === false) ?
-          <>
-            <OccupationContext.Provider value={{ occupation, setOccupation }}>
-              <GuestContext.Provider value={{ guestInfo, setGuestInfo }}>
-                <RoomContext.Provider value={{ roomInfo, setRoomInfo }}>
-                  <HotelOptions data={data} setHotelIndex={setHotelIndex} setHotelPicked={setHotelPicked} />
-                  <ReserveRoom data={data} hotelIndex={hotelIndex} setReserve={setReserve} hotelPicked={hotelPicked} />
-                </RoomContext.Provider>
-              </GuestContext.Provider>
-            </OccupationContext.Provider>
-          </>
-          :
-          <HotelReservation
-            hotelPicked={hotelPicked}
-            setData={setData}
-            data={data}
-            roomInfo={roomInfo}
-            guestInfo={guestInfo}
-            setReserve={setReserve}
-            reserve={reserve}
-            occupation={occupation} />
-        }
-      </>
-    );
-  };
-  if (data.length !== 0) {
-    return (
-      <>
-        {(reserve === false) ?
-          <>
-            <OccupationContext.Provider value={{ occupation, setOccupation }}>
-              <GuestContext.Provider value={{ guestInfo, setGuestInfo }}>
-                <RoomContext.Provider value={{ roomInfo, setRoomInfo }}>
-                  <HotelOptions setHotelIndex={setHotelIndex} setHotelPicked={setHotelPicked} />
-                  <ReserveRoom hotelIndex={hotelIndex} setReserve={setReserve} hotelPicked={hotelPicked} />
-                </RoomContext.Provider>
-              </GuestContext.Provider>
-            </OccupationContext.Provider>
-          </>
-          :
-          <HotelReservation
-            hotelPicked={hotelPicked}
-            setData={setData}
-            data={data}
-            roomInfo={roomInfo}
-            guestInfo={guestInfo}
-            setReserve={setReserve}
-            reserve={reserve}
-            occupation={occupation} />
-        }
-      </>
-    );
-  };
+  return (
+    <>
+      {(reserve === false) ?
+        <>
+          <OccupationContext.Provider value={{ occupation, setOccupation }}>
+            <GuestContext.Provider value={{ guestInfo, setGuestInfo }}>
+              <RoomContext.Provider value={{ roomInfo, setRoomInfo }}>
+                <HotelOptions data={data} setHotelIndex={setHotelIndex} setHotelPicked={setHotelPicked} />
+                <ReserveRoom data={data} hotelIndex={hotelIndex} setReserve={setReserve} hotelPicked={hotelPicked} />
+              </RoomContext.Provider>
+            </GuestContext.Provider>
+          </OccupationContext.Provider>
+        </>
+        :
+        <HotelReservation
+          hotelPicked={hotelPicked}
+          setData={setData}
+          data={data}
+          roomInfo={roomInfo}
+          guestInfo={guestInfo}
+          setReserve={setReserve}
+          reserve={reserve}
+          occupation={occupation} />
+      }
+    </>
+  );
 };
 
