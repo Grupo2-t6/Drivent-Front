@@ -1,15 +1,14 @@
 import HotelOptions from './HotelOptions';
 import ReserveRoom from '../../../components/rooms/Bedroom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import HotelReservation from './HotelReservation';
 import RoomContext from '../../../contexts/RoomContext';
 import GuestContext from '../../../contexts/guestContext';
 import OccupationContext from '../../../contexts/OccupationContext';
-import useHotelReserve from '../../../hooks/api/useGerHotel';
+
 export default function Hotel() {
   const [hotelIndex, setHotelIndex] = useState(null);
   const [reserve, setReserve] = useState(false);
-  const [page, setPage] = useState(false);
   const [hotelPicked, setHotelPicked] = useState([]);
   const [data, setData] = useState([]);
   const [roomInfo, setRoomInfo] = useState('');
