@@ -5,6 +5,7 @@ import RoomContext from '../../contexts/RoomContext';
 import GuestContext from '../../contexts/guestContext';
 import OccupationContext from '../../contexts/OccupationContext';
 import useHotel from '../../hooks/api/useHotel';
+import useUpdateRoomHotel from '../../hooks/api/useUpdateRoomHotel';
 
 function RenderIcons(props) {
   return (
@@ -39,7 +40,7 @@ function RoomBox(props) {
     props.setButton(true);
     setRoomInfo(props.number);
     setGuestInfo(props.type);
-    setOccupation(props.occupation); 
+    setOccupation(props.occupation);
   }
   function selectedRoom() {
     if (props.reserveButton === false) {
@@ -131,6 +132,9 @@ export default function ReserveRoom(props) {
   if (props.hotelIndex !== null) {
     hotelIndex = props.hotelIndex;
   }
+  function saveHotelInfo() {
+    props.setReserve(true);
+  }
   return (
     <>
       {
@@ -148,7 +152,7 @@ export default function ReserveRoom(props) {
               reserveButton={reserveButton} />)}
             </BoxContainer>
             {(reserveButton === true) ?
-              <Buttom onClick={() => props.setReserve(true)}>
+              <Buttom onClick={() => saveHotelInfo()}>
                 <h3>Reservar Quarto</h3>
               </Buttom>
               :

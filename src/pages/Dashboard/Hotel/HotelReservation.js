@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import useHotelReserve from '../../../hooks/api/useGerHotel';
 import useHotel from '../../../hooks/api/useHotel';
+import useUpdateRoomHotel from '../../../hooks/api/useUpdateRoomHotel';
 import { Buttom, HotelContainer, HotelContent, HotelInfo, HotelName, HotelPicked } from './style';
 
 export default function HotelReservation(props) {
+  console.log(props.roomInfo);
   const hotelInfo = {
     roomNumber: props.roomInfo,
     hotelName: props.hotelPicked.name,
@@ -25,6 +27,10 @@ export default function HotelReservation(props) {
       });
     }
   }, [hotel]);
+  function updateRoom() {
+    useUpdateRoomHotel({ roomNumber: props.roomInfo });
+  }
+  updateRoom();
   if (props.data.length !== 0) {
     return (
       <>
@@ -60,7 +66,7 @@ export default function HotelReservation(props) {
         <HotelContent>
           <HotelPicked>
             <div>
-              <img  src={props.hotelPicked.image} alt='foto do hotel'/>
+              <img src={props.hotelPicked.image} alt='foto do hotel' />
             </div>
             <HotelName>{props.hotelPicked.name}</HotelName>
             <h4>Quarto reservado</h4>

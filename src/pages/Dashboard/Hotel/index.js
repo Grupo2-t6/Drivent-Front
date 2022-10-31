@@ -9,11 +9,13 @@ import useHotelReserve from '../../../hooks/api/useGerHotel';
 export default function Hotel() {
   const [hotelIndex, setHotelIndex] = useState(null);
   const [reserve, setReserve] = useState(false);
+  const [page, setPage] = useState(false);
   const [hotelPicked, setHotelPicked] = useState([]);
   const [data, setData] = useState([]);
   const [roomInfo, setRoomInfo] = useState('');
   const [guestInfo, setGuestInfo] = useState('');
   const [occupation, setOccupation] = useState('');
+
   if (data.length === 0) {
     return (
       <>
@@ -22,8 +24,8 @@ export default function Hotel() {
             <OccupationContext.Provider value={{ occupation, setOccupation }}>
               <GuestContext.Provider value={{ guestInfo, setGuestInfo }}>
                 <RoomContext.Provider value={{ roomInfo, setRoomInfo }}>
-                  <HotelOptions setHotelIndex={setHotelIndex} setHotelPicked={setHotelPicked} />
-                  <ReserveRoom hotelIndex={hotelIndex} setReserve={setReserve} hotelPicked={hotelPicked} />
+                  <HotelOptions data={data} setHotelIndex={setHotelIndex} setHotelPicked={setHotelPicked} />
+                  <ReserveRoom data={data} hotelIndex={hotelIndex} setReserve={setReserve} hotelPicked={hotelPicked} />
                 </RoomContext.Provider>
               </GuestContext.Provider>
             </OccupationContext.Provider>
