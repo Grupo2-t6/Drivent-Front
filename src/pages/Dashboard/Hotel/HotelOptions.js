@@ -30,6 +30,7 @@ export default function HotelOptions(props) {
     });
     setOptions(newData);
   };
+  console.log(props.data);
   return (
     <>
       <HotelContainer>

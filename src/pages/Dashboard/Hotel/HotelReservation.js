@@ -5,7 +5,6 @@ import useUpdateRoomHotel from '../../../hooks/api/useUpdateRoomHotel';
 import { Buttom, HotelContainer, HotelContent, HotelInfo, HotelName, HotelPicked } from './style';
 
 export default function HotelReservation(props) {
-  console.log(props.roomInfo);
   const hotelInfo = {
     roomNumber: props.roomInfo,
     hotelName: props.hotelPicked.name,
@@ -16,6 +15,7 @@ export default function HotelReservation(props) {
   useHotel(hotelInfo);
 
   const { hotel } = useHotelReserve();
+
   useEffect(() => {
     if (hotel) {
       props.setData({
