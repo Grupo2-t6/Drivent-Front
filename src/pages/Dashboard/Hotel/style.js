@@ -15,7 +15,6 @@ h3{
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    margin-top: 18px;
     line-height: 23px;
     color: #8E8E8E;
   }
@@ -29,8 +28,20 @@ margin-top: 2%;
 const HotelFlex = styled.div`
 margin-top: 2%;
 display: flex;
+@media (max-width:760px) {
+    flex-direction:column;
+  }
 
 `;
+const NotHostingStyle = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 0;
+  `;
 
 const HotelPicked = styled.div`
 margin-right: 20px;
