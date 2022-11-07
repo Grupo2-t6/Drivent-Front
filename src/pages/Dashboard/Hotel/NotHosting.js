@@ -1,7 +1,6 @@
 import { HotelContainer, NotHostingStyle } from './style';
 
 export default function NotHosting( { value } ) {
-  // console.log(value);
   return (
     <>
       <HotelContainer>

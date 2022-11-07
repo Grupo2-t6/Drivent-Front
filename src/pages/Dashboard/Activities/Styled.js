@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 90%;
+  height: 92%;
   h1{
     font-family: 'Roboto';
     font-style: normal;
@@ -11,18 +11,31 @@ export const Container = styled.div`
     line-height: 40px;
     color: #000000;
 }
+@media (max-width: 700px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const DaysContainer = styled.div`
   display: flex;
   margin-bottom:44px;
   margin-top: 24px;
-`;
+
+  `;
 
 export const Trails = styled.div`
   display: flex;
   width: 100%;
   height: 80%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 250px;
+    justify-content: center;
+    align-items: center;
+  }
   `;
 
 export const TrailStyle = styled.div`
@@ -36,6 +49,14 @@ export const TrailStyle = styled.div`
   border: 5px;
   h4{
     color: #7B7B7B;
+  }
+
+  @media (max-width: 700px) {
+    justify-content: center;
+    align-items: center;
+    width: 94%;
+    height: 100%;
+    margin: 20px;
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Activitie({ nameActivT, initTimeT, endTimeT }) {
   const [confirm, setConfirm] = useState(false);
@@ -33,4 +33,8 @@ const ActivitieStyled = styled.div`
     margin-top: 6px;
     margin-left: 4px;
     font-size: 12px;
-  }`;
+  }
+  @media (max-width: 700px) {
+    margin-bottom: 5px;
+  }
+  `;

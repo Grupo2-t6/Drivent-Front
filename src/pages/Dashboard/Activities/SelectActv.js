@@ -1,57 +1,51 @@
 
 import { useState } from 'react';
 import Activitie from '../../../components/Activities';
+import Day from '../../../components/Activities/SelectDay';
 import{ Container, DaysContainer, Trails, TrailStyle, ActivitiesStyled, DayStyle } from './Styled';
 
-const actves = {
-  activitiesPrincipal: [{ nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 11.00 }, { nameActiv: 'Minecraft: montando o PC ideal', initTime: 10.00, endTime: 11.00 }, { nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 11.00 }],
+const daysEvent = ['Sexta, 22/10', 'Sábado, 23/10', 'Domingo, 24/10'];
 
-  activitiesLateral: [{ nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 11.00 }],
+const trialsEvent = ['Auditório Principal', 'Auditório Lateral', 'Sala de Workshop'];
 
-  activitiesWorkshop: [{ nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 10.00 }],
+const actvesInit = {
+  activitiesPrincipal: [],
+  activitiesLateral: [],
+  activitiesWorkshop: [],
 };
 
 export default function SelectActivities() {
-  const [dayTrial, setDayTrial] = useState('');
-
-  function Day({ day, setDayTrial, dayTrial }) {
-    let picked = false;
-    if(dayTrial===day) {
-      picked=true;
-    };
-    return(
-      <DayStyle onClick={() => setDayTrial(day)} background={picked ? '#FFEED2' : '#E0E0E0'}>
-        <h4>{day}</h4>
-      </DayStyle>
-    );
-  };
+  const [dayTrial, setDayTrial] = useState('Sexta, 22/10');
+  const [actvesGet, setActvesGet] = useState(actvesInit);
   
   function Trail({ arrayTrail, trail }) {
+    console.log(arrayTrail);
     return(
       <TrailStyle onClick={(trail) => console.log('trail')}>
         <h4>{trail}</h4>
         <ActivitiesStyled>
           {
-            arrayTrail.map(value => <Activitie nameActivT={value.nameActiv} initTimeT = {value.initTime} endTimeT = {value.endTime} />)
+            arrayTrail.map((value, index) => <Activitie nameActivT={value.nameActiv} initTimeT = {value.initTime} endTimeT = {value.endTime} key={index}/>)
           }
         </ActivitiesStyled>
       </TrailStyle>
     );
   };
-
-  const picked = false;
   return (
     <Container>
       <h1>Escolha de atividades</h1>
       <DaysContainer>
-        <Day day = 'Sexta, 22/10' setDayTrial={setDayTrial} dayTrial={dayTrial}/>
-        <Day day = 'Sábado, 23/10' setDayTrial={setDayTrial} dayTrial={dayTrial}/>
-        <Day day = 'Domingo, 24/10' setDayTrial={setDayTrial} dayTrial={dayTrial}/>
+        {
+          daysEvent.map((value, index) => 
+            <Day day={value} setDayTrial={setDayTrial} dayTrial={dayTrial} setActvesGet={setActvesGet} key={index}/>
+          
+          )
+        }
       </DaysContainer>
       <Trails>
-        <Trail trail = 'Auditório Principal' arrayTrail = {actves.activitiesPrincipal}/>
-        <Trail trail = 'Auditório Lateral' arrayTrail = {actves.activitiesLateral}/>
-        <Trail trail = 'Sala de Workshop' arrayTrail = {actves.activitiesWorkshop}/>
+        {
+          trialsEvent.map((value, index) => <Trail trail = {value} arrayTrail = {actvesGet.activitiesPrincipal} key={index}/>)
+        }
       </Trails>
     </Container>
   );
