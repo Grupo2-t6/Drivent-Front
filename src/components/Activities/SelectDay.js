@@ -1,4 +1,6 @@
 import { DayStyle } from '../../pages/Dashboard/Activities/Styled';
+import { useEffect } from 'react';
+import { getActivitieApi } from '../../services/getActivitieApi';
 
 const actvesTest = {
   activitiesPrincipal: [{ nameActiv: 'Minecraft', initTime: 9.00, endTime: 11.00 }],
@@ -19,13 +21,17 @@ export default function Day({ day, setDayTrial, dayTrial, setActvesGet }) {
     setDayTrial(day);
   };
 
+  async function setDay() {
+    const activitiesForDay = await getActivitieApi(day, 'Token.hcdisa');
+    console.log(activitiesForDay);
+    setActvesGet(activitiesForDay);
+  };
+
   let picked = false;
   if(dayTrial===day) {
-    if(day==='Sábado, 23/10') {
-      setActvesGet(actves);
-    }else {
-      setActvesGet(actvesTest);
-    }
+    useEffect(() => {
+      setDay();
+    }, []);
     picked=true;
   };
   return(
