@@ -18,14 +18,14 @@ export default function SelectActivities() {
   const [dayTrial, setDayTrial] = useState('Sexta, 22/10');
   const [actvesGet, setActvesGet] = useState(actvesInit);
   
-  function Trail({ arrayTrail, trail }) {
-    console.log(arrayTrail);
+  function Trail({ allTrail, trail }) {
+    console.log(allTrail);
     return(
       <TrailStyle onClick={(trail) => console.log('trail')}>
         <h4>{trail}</h4>
         <ActivitiesStyled>
           {
-            arrayTrail.map((value, index) => <Activitie nameActivT={value.nameActiv} initTimeT = {value.initTime} endTimeT = {value.endTime} key={index}/>)
+            allTrail.activitiesPrincipal.map((value, index) => <Activitie value={value} key={index}/>)
           }
         </ActivitiesStyled>
       </TrailStyle>
@@ -44,7 +44,7 @@ export default function SelectActivities() {
       </DaysContainer>
       <Trails>
         {
-          trialsEvent.map((value, index) => <Trail trail = {value} arrayTrail = {actvesGet.activitiesPrincipal} key={index}/>)
+          trialsEvent.map((value, index) => <Trail trail = {value} allTrail = {actvesGet} key={index}/>)
         }
       </Trails>
     </Container>

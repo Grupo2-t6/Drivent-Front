@@ -3,17 +3,17 @@ import { useEffect } from 'react';
 import { getActivitieApi } from '../../services/getActivitieApi';
 
 const actvesTest = {
-  activitiesPrincipal: [{ nameActiv: 'Minecraft', initTime: 9.00, endTime: 11.00 }],
+  activitiesPrincipal: [{ name: 'Minecraft', startTime: '9:00', finalTime: '11:00' }],
   activitiesLateral: [],
-  activitiesWorkshop: [{ nameActiv: 'Minecraft', initTime: 9.00, endTime: 10.00 }],
+  activitiesWorkshop: [{ name: 'Minecraft', startTime: '9:00', finalTime: '10:00' }],
 };
 
 const actves = {
-  activitiesPrincipal: [{ nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 11.00 }, { nameActiv: 'Minecraft: montando o PC ideal', initTime: 10.00, endTime: 11.00 }, { nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 11.00 }],
+  activitiesPrincipal: [{ name: 'Minecraft: montando o PC ideal', startTime: '9:00', finalTime: '11:00' }, { name: 'Minecraft: montando o PC ideal', startTime: '10:00', finalTime: '11:00' }, { name: 'Minecraft: montando o PC ideal', startTime: '9:00', finalTime: '11:00' }],
   
-  activitiesLateral: [{ nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 11.00 }],
+  activitiesLateral: [{ name: 'Minecraft: montando o PC ideal', startTime: '9:00', finalTime: '11:00' }],
   
-  activitiesWorkshop: [{ nameActiv: 'Minecraft: montando o PC ideal', initTime: 9.00, endTime: 10.00 }],
+  activitiesWorkshop: [{ name: 'Minecraft: montando o PC ideal', startTime: '9:00', finalTime: '10:00' }],
 };
 
 export default function Day({ day, setDayTrial, dayTrial, setActvesGet }) {
@@ -24,7 +24,7 @@ export default function Day({ day, setDayTrial, dayTrial, setActvesGet }) {
   async function setDay() {
     const activitiesForDay = await getActivitieApi(day, 'Token.hcdisa');
     console.log(activitiesForDay);
-    setActvesGet(activitiesForDay);
+    setActvesGet(actves);
   };
 
   let picked = false;
